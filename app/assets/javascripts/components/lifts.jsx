@@ -11,6 +11,54 @@ class Lifts extends React.Component {
       onerm: ""
     };
     console.log(this.state.lifts);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.getFormData = this.getFormData.bind(this)
+  }
+
+  handleChange(event) {
+    const value = event.target.value
+    const name = event.target.name
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const formData = {
+      date: this.state.date,
+      liftname: this.state.liftname,
+      ismetric: this.state.ismetric,
+      weightlifted: this.state.weightlifted,
+      repsperformed: this.state.repsperformed,
+      onerm: this.state.onerm
+    }
+    this.getFormData(formData)
+    console.log("form: ", formData);
+
+    fetch("", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }).then(res => res.json())
+      .then(liftData => console.log("liftData: ", liftData))
+  }
+
+  getFormData (formData) {
+    const newFormData = this.state.lifts
+    newFormData.push(formData)
+    this.setState({
+      lifts: newFormData,
+      date: "",
+      liftname: "",
+      ismetric: "",
+      weightlifted: "",
+      repsperformed: "",
+      onerm: ""
+    })
   }
   render () {
     return (
@@ -21,8 +69,10 @@ class Lifts extends React.Component {
             <input type="date" className="form-control" placeholder="date" name="date" value={this.state.value} onChange={this.handleChange} />
             <input type="text" className="form-control" placeholder="liftname" name="liftname" value={this.state.value} onChange={this.handleChange} />
             <input type="boolean" className="form-control" placeholder="ismetric" name="ismetric" value={this.state.value} onChange={this.handleChange} />
-            <input type="date" className="form-control" placeholder="date" name="date" value={this.state.value} onChange={this.handleChange} />
-            <input type="date" className="form-control" placeholder="date" name="date" value={this.state.value} onChange={this.handleChange} />
+            <input type="number" className="form-control" placeholder="weightlifted" name="weightlifted" value={this.state.value} onChange={this.handleChange} />
+            <input type="number" className="form-control" placeholder="repsperformed" name="repsperformed" value={this.state.value} onChange={this.handleChange} />
+            <input type="number" className="form-control" placeholder="onerm" name="onerm" value={this.state.value} onChange={this.handleChange} />
+            <button type="submit" className="btm btn-primary">Create Lift</button>
           </div>
         </form>
         <table className="table table-bordered">
