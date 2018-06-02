@@ -82,12 +82,9 @@ class Form extends React.Component {
   postNewLift(formData) {
     fetch("", {
       method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
+      headers: {"content-type": "application/json"},
       body: JSON.stringify(formData)
-    }).then(response => response.json())
-      .then(liftData => console.log("liftData: ", liftData))
+    })
       .catch(err => console.error(err))
   }
 
@@ -118,7 +115,7 @@ class Form extends React.Component {
             <div className="card">
               <div className="card-block">
                 <h2 className="card-title text-xs-center">1 RM Estimate</h2>
-                <h3 className="card-title text-xs-center">{Math.ceil(this.state.onerm)}</h3>
+                <h3 className="card-text text-xs-center">{Math.ceil(this.state.onerm)}</h3>
               </div>
             </div>
           </div>
