@@ -69,7 +69,6 @@ class Form extends React.Component {
     }
     this.props.getFormData(formData)
     this.postNewLift(formData)
-    console.log("form: ", formData);
     this.setState({
       date: "",
       liftname: "",
@@ -87,25 +86,34 @@ class Form extends React.Component {
         "content-type": "application/json"
       },
       body: JSON.stringify(formData)
-    }).then(res => res.json())
+    }).then(response => response.json())
       .then(liftData => console.log("liftData: ", liftData))
+      .catch(err => console.error(err))
   }
 
   render() {
     return (
         <form className="form-inline" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <input type="date" className="form-control" placeholder="date" name="date" value={this.state.date} onChange={this.handleChange} />
+            <div className="form-group">
+              <input type="date" className="form-control" placeholder="date" name="date" value={this.state.date} onChange={this.handleChange} />
+            </div>
 
-            <input type="text" className="form-control" placeholder="liftname" name="liftname" value={this.state.liftname} onChange={this.handleChange} />
+            <div className="form-group">
+              <input type="text" className="form-control" placeholder="liftname" name="liftname" value={this.state.liftname} onChange={this.handleChange} />
+            </div>
 
             <button className="btn btn-primary" onClick={this.toggleUnit} >Metric = {this.state.ismetric.toString()}</button>
 
-            <input type="number" className="form-control" placeholder="weightlifted" name="weightlifted" value={this.state.weightlifted} onChange={this.handleChange} />
+            <div className="form-group">
+              <input type="number" className="form-control" placeholder="weightlifted" name="weightlifted" value={this.state.weightlifted} onChange={this.handleChange} />
+            </div>
 
-            <input type="number" className="form-control" placeholder="repsperformed" name="repsperformed" min="1" max="10" value={this.state.repsperformed} onChange={this.handleChange} />
+            <div className="form-group">
+              <input type="number" className="form-control" placeholder="repsperformed" name="repsperformed" min="1" max="10" value={this.state.repsperformed} onChange={this.handleChange} />
+            </div>
 
-          <button type="submit" className="btm btn-primary" disabled={!this.isValidEntry()} >Create Lift</button>
+            <button type="submit" className="btn btn-primary" disabled={!this.isValidEntry()} >Create Lift</button>
 
             <div className="card">
               <div className="card-block">
