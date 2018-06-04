@@ -66,11 +66,5 @@ gem 'bootstrap', '~> 4.0.0alpha3.1'
 gem 'react-rails'
 gem 'react-jsx-sprockets'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'popper_js'
 
-# group :development, :test do
-#   gem 'pg'
-# end
-
-# group :production do
-#   gem 'pg'
-# end
