@@ -67,7 +67,7 @@ class Form extends React.Component {
       repsperformed: this.state.repsperformed,
       onerm: this.state.onerm
     }
-    this.props.getFormData(formData)
+    // this.props.getFormData(formData)
     this.postNewLift(formData)
     this.setState({
       date: "",
@@ -85,6 +85,8 @@ class Form extends React.Component {
       headers: {"content-type": "application/json"},
       body: JSON.stringify(formData)
     })
+      .then(response => response.json())
+      .then(response => this.props.getFormData(response))
       .catch(err => console.error(err))
   }
 

@@ -78,6 +78,7 @@ class Lift extends React.Component {
 
   editLift(editData) {
     const { lift } = this.props;
+    if (!lift.id) {throw new Error("Invalid object")}
     fetch(`/lifts/${lift.id}`, {
       method: "PUT",
       headers: new Headers({ "Content-Type": "application/json" }),
