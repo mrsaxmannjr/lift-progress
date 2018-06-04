@@ -37,18 +37,19 @@ class Lifts extends React.Component {
 
   render () {
     return (
-      <div className="lifts">
+      <div className="lifts container">
         <h1 className="title">Weight Lifting Progress Tracker</h1>
         <Form getFormData={this.getFormData} />
-        <table className="table table-bordered">
-          <thead></thead>
-          <th>Date</th>
-          <th>Lift Name</th>
-          <th>Weight Lifted</th>
-          <th>Reps Performed</th>
-          <th>1 Rep Max</th>
-          <th>Metric ?</th>
-          <th>Actions</th>
+        <table className="table table-bordered table-hover table-striped">
+          <thead className="thead-dark ">
+            <th className="text-nowrap">Date</th>
+            <th className="text-nowrap">Lift Name</th>
+            <th className="text-nowrap">Weight Lifted</th>
+            <th className="text-nowrap">Reps Performed</th>
+            <th className="text-nowrap">1 Rep Max</th>
+            <th className="text-nowrap">Metric ?</th>
+            <th className="text-nowrap">Actions</th>
+          </thead>
           <tbody>
             {this.state.lifts.map(lift => <Lift key={lift.id} lift={lift} deleteLift={this.deleteLift} updateLift={this.updateLift} />)}
           </tbody>

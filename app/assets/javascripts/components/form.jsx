@@ -90,36 +90,37 @@ class Form extends React.Component {
 
   render() {
     return (
+      <React.Fragment>
         <form className="form-inline" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <div className="form-group">
+          <div className="form-row align-items-center col-lg-12">
+            <div className="form-group col-lg-2 text-left">
               <input type="date" className="form-control" placeholder="date" name="date" value={this.state.date} onChange={this.handleChange} />
             </div>
 
-            <div className="form-group">
+            <div className="form-group col-lg-2">
               <input type="text" className="form-control" placeholder="liftname" name="liftname" value={this.state.liftname} onChange={this.handleChange} />
             </div>
 
-            <button className="btn btn-primary" onClick={this.toggleUnit} >Metric = {this.state.ismetric.toString()}</button>
+            <button className="btn btn-primary  col-lg-2" onClick={this.toggleUnit} >Metric = {this.state.ismetric.toString()}</button>
 
-            <div className="form-group">
+            <div className="form-group col-lg-2">
               <input type="number" className="form-control" placeholder="weightlifted" name="weightlifted" value={this.state.weightlifted} onChange={this.handleChange} />
             </div>
 
-            <div className="form-group">
-              <input type="number" className="form-control" placeholder="repsperformed" name="repsperformed" min="1" max="10" value={this.state.repsperformed} onChange={this.handleChange} />
+            <div className="form-group col-lg-2">
+              <input type="number" className="form-control" placeholder="repsperformed" name="repsperformed" min="1" max="10" value={this.state.repsperformed} onChange={this.handleChange} style={{"min-width": "100px"}} />
             </div>
 
-            <button type="submit" className="btn btn-primary" disabled={!this.isValidEntry()} >Create Lift</button>
+            <button type="submit" className="btn btn-primary col-lg-2" disabled={!this.isValidEntry()} >Create Lift</button>
 
-            <div className="card">
-              <div className="card-block">
-                <h2 className="card-title text-xs-center">1 RM Estimate</h2>
-                <h3 className="card-text text-xs-center">{Math.ceil(this.state.onerm)}</h3>
-              </div>
-            </div>
           </div>
         </form>
+            <div className="card text-center col-xs-4 offset-xs-1">
+              <div className="card-block">
+                <h2 className="card-title text-xs-center">1 Rep Max Estimate is {isNaN(this.state.onerm ) ? 0 : Math.ceil(this.state.onerm) }</h2>
+              </div>
+      </div>
+      </React.Fragment>
     )
   }
 };

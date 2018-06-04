@@ -10,8 +10,9 @@ class Lift extends React.Component {
       weightlifted: this.props.lift.weightlifted,
       repsperformed: this.props.lift.repsperformed,
     }
-    // console.log("state from props", this.state);
+    console.log("state from props", this.state);
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleChange - this.handleChange.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.toggleUnit = this.toggleUnit.bind(this)
     this.liftForm = this.liftForm.bind(this)
@@ -19,6 +20,7 @@ class Lift extends React.Component {
     this.calculateOneRM = this.calculateOneRM.bind(this)
     this.editLift = this.editLift.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
+    console.log("this", this);
   };
 
   handleChange(event) {
@@ -87,7 +89,7 @@ class Lift extends React.Component {
       .then(response => this.setState({
         edit: false
       }))
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
     this.props.updateLift(lift, editData);
   }
 
@@ -109,7 +111,7 @@ class Lift extends React.Component {
           <td>{lift.repsperformed}</td>
           <td>{Math.ceil(lift.onerm)}</td>
           <td>{lift.ismetric.toString()}</td>
-          <td>
+          <td className="btn-group">
             <button className="btn btn-primary" onClick={this.handleToggle}>Edit</button>
             <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
           </td>
@@ -118,26 +120,26 @@ class Lift extends React.Component {
   }
 
   liftForm() {
-    const { lift } = this.state;
+    const { date, liftname, weightlifted, repsperformed, onerm, ismetric } = this.state;
     return (
         <tr>
           <td>
-            <input className="form-control" type="date" name="date" value={lift.date} onChange={this.handleChange} />
+            <input className="form-control" type="date" name="date" value={date} onChange={e => this.handleChange(e)} />
           </td>
           <td>
-            <input className="form-control" type="text" name="liftname" value={lift.liftname} onChange={this.handleChange} />
+            <input className="form-control" type="text" name="liftname" value={liftname} onChange={e => this.handleChange(e)} />
           </td>
           <td>
-            <input className="form-control" type="number" name="weightlifted" value={lift.weightlifted} onChange={this.handleChange}/>
+            <input className="form-control" type="number" name="weightlifted" value={weightlifted} onChange={e => this.handleChange(e)}/>
           </td>
           <td>
-            <input className="form-control" type="number" name="repsperformed" value={lift.repsperformed} onChange={this.handleChange} min="1" max="10"/>
+            <input className="form-control" type="number" name="repsperformed" value={repsperformed} onChange={e => this.handleChange(e)} min="1" max="10"/>
           </td>
-          <td>{Math.ceil(lift.onerm)}</td>
+          <td>{Math.ceil(onerm)}</td>
           <td>
-            <button className="btn btn-primary" onClick={this.toggleUnit} >Metric = {this.state.ismetric.toString()}  </button>
+            <button className="btn btn-primary" onClick={this.toggleUnit} >Metric = {ismetric.toString()}  </button>
           </td>
-          <td>
+          <td className="btn-group">
             <button className="btn btn-primary" onClick={this.handleEdit}>Update</button>
             <button className="btn btn-danger" onClick={this.handleToggle} >Cancel</button>
           </td>
@@ -147,7 +149,7 @@ class Lift extends React.Component {
 
   render() {
     return (
-      this.state.edit ? this.liftForm() : this.liftRow()
+      this.state.edit ? this.liftForm.call(this) : this.liftRow.call(this)
     )
   }
 }
