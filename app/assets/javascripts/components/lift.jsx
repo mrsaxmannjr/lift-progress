@@ -10,7 +10,6 @@ class Lift extends React.Component {
       weightlifted: this.props.lift.weightlifted,
       repsperformed: this.props.lift.repsperformed,
     }
-    console.log("state from props", this.state);
     this.handleDelete = this.handleDelete.bind(this)
     this.handleChange - this.handleChange.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
@@ -20,7 +19,6 @@ class Lift extends React.Component {
     this.calculateOneRM = this.calculateOneRM.bind(this)
     this.editLift = this.editLift.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
-    console.log("this", this);
   };
 
   handleChange(event) {
